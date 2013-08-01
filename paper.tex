@@ -61,7 +61,7 @@ experimental knowledge in the domain of multicore hardware and interpreted langu
 specifically threaded applications).
 The authors begin with a focus on the fact that multicore hardware systems are becoming
 more and more common and continuing to expand in the number of cores and sockets moving
-into the future due to Moore's Law. The authors also explain that multicore performance
+into the future due to Moore's Law~\cite{Moore:2000:CMC}. The authors also explain that multicore performance
 for most standard programming languages (non-interpreted) is a much studied field and
 has been extensively tested. However, the domain of interpreted languages is still a largely
 unstudied and untested domain when it comes to performance on multicore multisocket hardware
@@ -85,8 +85,8 @@ To the authors knowledge, most of these experimental tests have not been studied
 except for the clock frequency or power implications of their research. Related work is mentioned
 in that JVM services yield different performance and power characteristic compared to the Java
 application itself. Other end-to-end performance test have been made in the field, however,
-these tests were limited to single socket hardware. It has also been shown that the JBM
-services consume on average 20\% of total power needed. The previous works show that the
+these tests were limited to single socket hardware. It has also been shown that the JVM
+services consume on average 20\% of total power needed~\cite{Cao:2012:YYP}. The previous works show that the
 domain of power designation inside of interpreted languages is very much a vital field
 that should be researcher. 
 
@@ -96,7 +96,7 @@ The paper presents the idea of dark silicon which is the idea that high end serv
 be able to power entire processors all the time. We believe this problem will soon be carried
 over to the hand held market where battery life is becoming an increasing factor in the phone choice
 of many consumers as phones become more powerful and require more energy to run. Intel's Turbo
-Boost technology is a good representation of this problem as it allows for short duration 
+Boost~\cite{Intel:2008} technology is a good representation of this problem as it allows for short duration 
 clock frequency boosts on a limited number of cores.
 
 In our opinion, the problems being investigated by this paper are extremely worthwhile when
@@ -184,6 +184,12 @@ The authors had a great theme of focusing on performance as a function of the po
 This paper had a great mix of experiments, but the 
 
 \section{Appendix}
+
+
+\bibliographystyle{IEEEtran}
+\balance
+\bibliography{paper}
+
 
 % End of the paper
 \end{document}
