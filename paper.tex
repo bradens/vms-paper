@@ -34,7 +34,6 @@ Victoria, British Columbia, Canada \\ jell@uvic.ca, braden@uvic.ca}
 % Make the title area
 \maketitle
 
-
 \begin{abstract}
 Abstract
 \end{abstract}
@@ -42,12 +41,26 @@ Abstract
 
 \section{Introduction}
 
+\section{Discussion of Results}
+The paper had some clear, well defined and well presented results.  Since the authors used a two-socket system, shown in figure~\ref{fig:cores}, they were able to many isolation tests between sockets.  Below some of the most interesting findings are discussed: \\  %TODO UPDATE THIS WITH JORDAN's LABEL NAME
+
+\subsection{Isolating garbage collection threads to a separate socket}
+ 
+The authors found that this leads to ``small performance degradation (no more than 17\%) for most benchmarks because of increased latency between sockets; however, one benchmark substantially benefits (66\%) from increased cache capacity."
+
+This is interesting because if they separate the GC onto a different socket, if the process has a lot of cache allocation then we will see a large increase in efficiency, conversely, if the application must collect frequently then this will show a large degradation.  This finding would be good to keep in mind for applications similar to ``avrora'', one of their test projects which is sensitive to thread-core mapping.
+
+\subsection{Isolating all threads or compilation thread to one socket in a power-constrainged environment}
+
+The authors find ``When power-constrained in a multi-socket en- vironment, it is better to either keep application and JVM service threads on one socket, and power down the other socket(s), or to isolate the compilation thread onto the sec- ond socket and lower its frequency''. This is a really interesting stat, for two reasons.  The first reason is that if you are 
 
 
-\bibliographystyle{IEEEtran}
-\balance
-\bibliography{paper}
+\section{Experiments}
 
+\section{Recommendations}
+The authors had a great theme of focusing on performance as a function of the power used, although they should have kept more along this theme, as well, we believe that there should be more integration of findings. 
+
+\section{Appendix}
 
 % End of the paper
 \end{document}
