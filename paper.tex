@@ -11,6 +11,7 @@
 
 \usepackage{balance}
 \usepackage{float}
+\usepackage{caption}
 \floatstyle{plaintop}
 \restylefloat{table}
 
@@ -23,7 +24,7 @@
 
 % Paper title
 % Can use linebreaks \\ within to get better formatting as desired
-\title{Paper Title}
+\title{Review: Exploring Multi-Threaded Java Application Performance on Multicore Hardware}
 
 % Authors names
 \author{\IEEEauthorblockN{Jordan Ell and Braden Simpson}
@@ -39,7 +40,102 @@ Abstract
 \end{abstract}
 
 
-\section{Introduction}
+\section{Problem}
+\label{sec:problem}
+
+The problems being discussed by the authors in this paper mainly focus on the lack of 
+experimental knowledge in the domain of multicore hardware and interpreted languages.
+The authors begin with a focus on the fact that multicore hardware systems are becoming
+more and more common and continuing to expand in the number of cores and sockets moving
+into the future due to Moore's Law. The authors also explain that multicore performance
+for most standard programming languages (non-interpreted) is a much studied field and
+has been extensively tested. However, the domain of interpreted languages is still a largely
+unstudied and tested domain when it comes to performance on multicore multisocket hardware
+systems. This can be attributed to the fact that instead of having just application threads to
+worry about, you have virtual machine threads which can pause application execution, be needed
+prior to certain execution points, and otherwise trigger non-deterministic actions of the various threads.
+
+This paper presents their exploratory approach of the problem domain as a novel understanding of 
+the field. This paper focuses on several factors of multicore hardware running an interpreted
+program in Java which are the following: the clock frequency of different type of execution threads; 
+the isolation of different types of execution threads between both cores and sockets in the 
+hardware; the isolation of different types of threads between cores and socket at different
+execution times in the program; the pinning of different thread types to specific cores; and some
+combined affects of the tests listed above. The types of threads listed above which are mentioned
+specifically in the problems to be tested and the results are: garbage collection, compilation, 
+all JVM threads, and all application threads.
+
+To the authors knowledge, most of these experimental tests have not been studied in the past
+except for the clock frequency or power implications of their research. The authors explain
+the importance that energy and power controls have, especially with regards to hand held devices.
+The paper presents the idea of dark silicon which is the idea that high end servers will no longer
+be able to power entire processors all the time. We believe this problem will soon be carried
+over to the hand held market where battery life is becoming an increasing factor in the phone choice
+of many consumers as phones become more powerful and require more energy to run. Intel's Turbo
+Boost technology is a good representation of this problem as it allows for short duration 
+clock frequency boosts on a limited number of cores.
+
+In our opinion, the problems being investigated by this paper are extremely worthwhile when
+it comes to any device with a limited processor speed or that is battery operated, and in the
+case of mobile hardware, both. If the developers of Android can reduce power to an isolated
+core on the phone which is in charge of running garbage collection to save 20\% processing
+power, we believe this research will be of vital importance.
+
+\section{Methodology}
+
+For the experimental tests, the authors consider multi-threaded test applications written in
+Java. The authors also use a multicore, multisocket hardware configuration. The authors 
+consider three main areas of focus (with combinations there of) which are: number of application
+and JVM service thread; thread-to-core/socket mapping; and frequency scaling and power implications.
+Through these three main areas of focus, 23 experiments are then preformed, each of which usually
+involves some combination of the three main ares of focus. Some of the more interesting tests preformed 
+are: isolation of garbage collector threads or compiler threads to a unique socket; isolation of
+JVM threads with lower clock frequency; and isolation of non-garbage collection threads only 
+at startup to a unique socket. Each of the experiments is preformed on 7 Java programs using
+the same hardware configuration. The hardware platform used for the experiments is an IBM
+x3650 M2 with two Intel Xeon X5570 processors that are 45-nm Westmere chips with 4 cores each
+(see Figure~\ref{fig:cores}). It is worth noting that for some experiments, different minimum
+head sizes were used in the matter of 1.5, 2, and 3 times larger than benchmark tests that were
+run before the experiments to consider a baseline of executions.
+
+\begin{center}[t]
+\includegraphics[height=60mm]{images/hardware}
+\captionof{figure}{Hardware configuration for experiments.\label{fig:cores}}
+\end{center}
+
+\subsection{Problem Solving}
+
+In order to solve the problems listed in Section~\ref{sec:problem}, the authors
+conducted experiments in the configuration as explained above. Without going into all of the 23
+experiments performed, we can state that the authors successfully investigated the following.
+What affects different thread isolation has was investigated by isolating different JVM threads
+from the application threads. What affects different thread isolation at the start of execution
+was investigated by isolating different JBM thread types at execution startup. All of the
+aforementioned isolation occurred on garbage collection, compilation, and all JVM threads
+while being isolated on cores and whole sockets. What affects clock frequency had on different
+threads was investigates by a combined result of the above. This means threads were isolated all
+the time or just at execution startup while the clock frequency of the whole socket was lowered
+or raised. (This had to be done at socket level due to hardware limitations, so any isolation
+at the core level was not entirely possible for these tests.) 
+
+\subsection {Discussion}
+
+Overall the methodology of this paper was quite sound. They used 23 different experiments to
+cover most if not all bases that were presented by their exploratory research areas (listed above).
+They laid out each experiment is a very understandable way, first by giving the specific circumstances
+of the next experiments followed by the results (always displayed in bar charts), overall findings, as
+well as a discussion of said finding. The authors ended up with 14 findings from their 23 experiments
+(some were not overly unique) which should be considered a large amount. Since their research question
+was more of an exploration into a field with no prior knowledge, it is hard to say that they missed
+this or that. However, given their results after the 23 experiments, we would have liked to have seen
+a combined effort to pick and choose the best improvements in execution time in order to create
+only final test of all possible speed up that were found in order to give a real strong recommendation
+in the end of the paper. We would have also liked to have seen more high frequency clock tests as most
+of their experiments (except 1) only dealt with lower clock speeds. These extra tests would have 
+provided a better frame of reference for the results and findings in comparison.
+Other than this, the methodology was great as well as the writing gave great
+explanations of the work being performed.
+
 
 \section{Discussion of Results}
 The paper had some clear, well defined and well presented results.  Since the authors used a two-socket system, shown in figure~\ref{fig:cores}, they were able to many isolation tests between sockets.  Below some of the most interesting findings are discussed: \\  %TODO UPDATE THIS WITH JORDAN's LABEL NAME
