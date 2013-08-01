@@ -29,16 +29,11 @@
 % Authors names
 \author{\IEEEauthorblockN{Jordan Ell and Braden Simpson}
 \IEEEauthorblockA{University of Victoria,
-Victoria, British Columbia, Canada \\ jell@uvic.ca, braden@uvic.ca}
+Victoria, British Columbia, Canada \\ jell, braden\{@uvic.ca\}}
 }
 
 % Make the title area
 \maketitle
-
-\begin{abstract}
-Abstract
-\end{abstract}
-
 
 \section{Problem}
 \label{sec:problem}
@@ -98,8 +93,8 @@ x3650 M2 with two Intel Xeon X5570 processors that are 45-nm Westmere chips with
 head sizes were used in the matter of 1.5, 2, and 3 times larger than benchmark tests that were
 run before the experiments to consider a baseline of executions.
 
-\begin{center}[t]
-\includegraphics[height=60mm]{images/hardware}
+\begin{center}
+\includegraphics[height=45mm]{images/hardware}
 \captionof{figure}{Hardware configuration for experiments.\label{fig:cores}}
 \end{center}
 
@@ -138,7 +133,7 @@ explanations of the work being performed.
 
 
 \section{Discussion of Results}
-The paper had some clear, well defined and well presented results.  Since the authors used a two-socket system, shown in figure~\ref{fig:cores}, they were able to many isolation tests between sockets.  Below some of the most interesting findings are discussed: \\  %TODO UPDATE THIS WITH JORDAN's LABEL NAME
+The paper had some clear, well defined and well presented results.  Since the authors used a two-socket system, shown in figure~\ref{fig:cores}, they were able to many isolation tests between sockets.  The paper performed 23 experiements with 14 findings, below we outline some of the most interesting findings, and our opinions:
 
 \subsection{Isolating garbage collection threads to a separate socket}
  
@@ -148,13 +143,16 @@ This is interesting because if they separate the GC onto a different socket, if 
 
 \subsection{Isolating all threads or compilation thread to one socket in a power-constrainged environment}
 
-The authors find ``When power-constrained in a multi-socket en- vironment, it is better to either keep application and JVM service threads on one socket, and power down the other socket(s), or to isolate the compilation thread onto the sec- ond socket and lower its frequency''. This is a really interesting stat, for two reasons.  The first reason is that if you are 
-
+The authors find ``When power-constrained in a multi-socket en- vironment, it is better to either keep application and JVM service threads on one socket, and power down the other socket(s), or to isolate the compilation thread onto the sec- ond socket and lower its frequency''. This is a really interesting stat, for two reasons.  The first reason is that if you are building an application with power-constraints, then these are definite possible thread-core mappings that are relevent, and secondly, it would be interesting to compare each one of these methods separately and find the best fit for the application.  
 
 \section{Experiments}
 
+The experiments done were methodological and well documented, however they had some limitations.  From the paper ``...on this machine, it is only possi- ble to change the frequency at a socket-level'' which means that the results are missing out on a lot of added complexity and potential fine tuning that could occur.  
+
 \section{Recommendations}
-The authors had a great theme of focusing on performance as a function of the power used, although they should have kept more along this theme, as well, we believe that there should be more integration of findings. 
+The authors had a great theme of focusing on performance as a function of the power used, although they should have kept more along this theme, as well, we believe that there should be more integration of findings.  For example, they have some excellent findings that say that we should have isolate the compilation thread to a socket when in a power-constrained environment, but what if we modify the parameters of either of those sockets, what is the net effect.
+
+This paper had a great mix of experiments, but the 
 
 \section{Appendix}
 
