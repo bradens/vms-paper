@@ -23,7 +23,7 @@
 
 % Paper title
 % Can use linebreaks \\ within to get better formatting as desired
-\title{Paper Title}
+\title{Review: Exploring Multi-Threaded Java Application Performance on Multicore Hardware}
 
 % Authors names
 \author{\IEEEauthorblockN{Jordan Ell and Braden Simpson}
@@ -40,7 +40,45 @@ Abstract
 \end{abstract}
 
 
-\section{Introduction}
+\section{Problem}
+
+The problems being discussed by the authors in this paper mainly focus on the lack of 
+experimental knowledge in the domain of multicore hardware and interpreted languages.
+The authors begin with a focus on the fact that multicore hardware systems are becoming
+more and more common and continuing to expand in the number of cores and sockets moving
+into the future due to Moore's Law. The authors also explain that multicore performance
+for most standard programming languages (non-interpreted) is a much studied field and
+has been extensively tested. However, the domain of interpreted languages is still a largely
+unstudied and tested domain when it comes to performance on multicore multisocket hardware
+systems. This can be attributed to the fact that instead of having just application threads to
+worry about, you have virtual machine threads which can pause application execution, be needed
+prior to certain execution points, and otherwise trigger non-deterministic actions of the various threads.
+
+This paper presents their exploratory approach of the problem domain as a novel understanding of 
+the field. This paper focuses on several factors of multicore hardware running an interpreted
+program in Java which are the following: the clock frequency of different type of execution threads; 
+the isolation of different types of execution threads between both cores and sockets in the 
+hardware; the isolation of different types of threads between cores and socket at different
+execution times in the program; the pinning of different thread types to specific cores; and some
+combined affects of the tests listed above. The types of threads listed above which are mentioned
+specifically in the problems to be tested and the results are: garbage collection, compilation, 
+all JVM threads, and all application threads.
+
+To the authors knowledge, most of these experimental tests have not been studied in the past
+except for the clock frequency or power implications of their research. The authors explain
+the importance that energy and power controls have, especially with regards to hand held devices.
+The paper presents the idea of dark silicon which is the idea that high end servers will no longer
+be able to power entire processors all the time. We believe this problem will soon be carried
+over to the hand held market where battery life is becoming an increasing factor in the phone choice
+of many consumers as phones become more powerful and require more energy to run. Intel's Turbo
+Boost technology is a good representation of this problem as it allows for short duration 
+clock frequency boosts on a limited number of cores.
+
+In our opinion, the problems being investigated by this paper are extremely worthwhile when
+it comes to anything with a limited processor speed or that is battery operated, and in the
+case of mobile hardware, both. If the developers of Android can reduce power to an isolated
+core on the phone which is in charge of running garbage collection to save 20\% processing
+power, we believe this research will be of vital importance.
 
 
 
