@@ -162,7 +162,7 @@ explanations of the work being performed.
 
 
 \section{Discussion of Results}
-The paper had some clear, well defined and well presented results.  Since the authors used a two-socket system, shown in Figure~\ref{fig:cores}, they were able to many isolation tests between sockets.  The paper performed 23 experiements with 14 findings, each of them modifying separate parameters of the system, below we outline some of the most interesting findings, and our opinions:
+The paper had some clear, well defined and well presented results.  Since the authors used a two-socket system, shown in Figure~\ref{fig:cores}, they were able to many isolation tests between sockets.  The paper performed 23 experiments with 14 findings, each of them modifying separate parameters of the system, below we outline some of the most interesting findings, and our opinions:
 
 \subsection{Isolating garbage collection threads to a separate socket}
  
@@ -176,19 +176,18 @@ The authors find ``When power-constrained in a multi-socket environment, it is b
 
 \section{Experiments}
 
-The experiments done were methodological and well documented, however they had some limitations.  From the paper ``...on this machine, it is only possible to change the frequency at a socket-level'' which means that the results are missing out on some added complexity and potential fine tuning that could occur among individual core frequencies.
+The experiments done were methodological and well documented, however they had some limitations.  From the paper: ``...on this machine, it is only possible to change the frequency at a socket-level'', which means that the results are missing out on some potential added complexity and fine tuning that could occur among individual core frequencies.  The experiments performed, are described in a readable, friendly way for the reader.   
 
-This paper does a good job of trying to stay away from being application specific, since measuring performance of Java applications is a difficult thing to do. 
+This paper does a good job of trying to stay away from being too application specific, since measuring performance of Java applications in a general way is a very difficult problem.  They could have chosen more projects to try and be more general.   
 
 \section{Recommendations}
 The authors had a interesting theme of focusing on performance degradation as the frequency is decreased.  However, we felt that they should have done some tests on the opposite, to see effects on power and running time when \emph{increasing} the clock frequency.  
 
-As well, we believe that there should be more integration of findings; for example, they have some excellent findings that say that we should have isolate the compilation thread to a socket when in a power-constrained environment, but what if we modify the parameters of either of those sockets, what is the net effect.  We found that the paper should provide some holistic results if possible, for example, provide a scenario and give the most efficient way of mapping the threads and cores.
+As well, we believe that there should be more integration of findings; for example, they have some excellent findings that say that we should isolate the compilation thread to a socket when in a power-constrained environment, but what if we modify the parameters of either of those sockets, what is the net effect.  We found that the paper should provide some holistic results if possible, for example, provide a scenario and give the most efficient way of mapping the threads and cores.
 
-This paper is very relevant to many new and emerging topics in the computer industry, especially Java-based mobile devices such as the new Android phones.  One of the most sought after specifications in a phone is the battery life, and the greatest contribution of this paper is how to map JVM threads and cores to sockets to produce the most efficient system.
+This paper is very relevant to many new and emerging topics in the computer industry, especially Java-based mobile devices such as the new Android phones\cite{android}.  One of the most sought after specifications in a phone is the battery life, and the greatest contribution of this paper is how to map JVM threads and cores to sockets to produce the most efficient system.  This paper presents findings that show actual performance tests on multi-core systems which is valuable to the industry, as they work directly with systems similar to the one tested.
 
-\section{Appendix}
-
+We give this paper an \textit{accept} recommendation.
 
 \bibliographystyle{IEEEtran}
 \balance
